@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ڤيدرو | VIDRO — مطعم وكافيه راقي في الرياض</title>
+  <meta name="description" content="مطعم ڤيدرو (VIDRO) - تجربة طهي فاخرة على طريق الأمير محمد بن عبد العزيز (التحلية)، الرياض. مأكولات راقية، قهوة مختصة وأجواء ساحرة." />
+  
+  <!-- خطوط جوجل: Amiri & Cairo للعربية + Cormorant Garamond & Plus Jakarta Sans للإنجليزية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       نظام التصميم والمتغيرات (Design System)
+       ========================================================================== */
+    :root {
+      --color-charcoal-deep: #101210;
+      --color-charcoal: #171a17;
+      --color-charcoal-card: #1f231f;
+      --color-charcoal-border: #2d332d;
+      --color-olive-dark: #242a20;
+      --color-olive-muted: #3a4234;
+      --color-olive-accent: #606d54;
+      --color-gold: #c6a664;
+      --color-gold-light: #dfc88e;
+      --color-ivory: #f9f7f2;
+      --color-ivory-dim: #d8d4ca;
+      --color-text-muted: #9aa298;
+      
+      --font-display-en: 'Cormorant Garamond', Georgia, serif;
+      --font-body-en: 'Plus Jakarta Sans', sans-serif;
+      --font-display-ar: 'Amiri', serif;
+      --font-body-ar: 'Cairo', sans-serif;
+
+      --font-display: var(--font-display-ar);
+      --font-body: var(--font-body-ar);
+
+      --transition-smooth: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --max-width: 1260px;
+      --header-height: 80px;
+      --radius: 8px;
+    }
+
+    html[dir="ltr"] {
+      --font-display: var(--font-display-en);
+      --font-body: var(--font-body-en);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-charcoal-deep);
+      color: var(--color-ivory);
+      font-family: var(--font-body);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color var(--transition-smooth);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.82rem;
+      color: var(--color-gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    html[dir="ltr"] .section-eyebrow {
+      letter-spacing: 0.18em;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.8vw, 3.1rem);
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--color-ivory);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      max-width: 600px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .divider-gold {
+      width: 55px;
+      height: 2px;
+      background-color: var(--color-gold);
+      margin: 1.25rem 0 1.75rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.9rem 2rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all var(--transition-smooth);
+      white-space: nowrap;
+    }
+
+    .btn-gold {
+      background-color: var(--color-gold);
+      color: var(--color-charcoal-deep);
+    }
+    .btn-gold:hover {
+      background-color: var(--color-gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(198, 166, 100, 0.25);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+    }
+    .btn-outline:hover {
+      background-color: rgba(198, 166, 100, 0.1);
+      color: var(--color-gold-light);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       شريط التنقل العلوي والقائمة الجانبية (Navbar & Mobile Drawer)
+       ========================================================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background-color: rgba(16, 18, 16, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(198, 166, 100, 0.15);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .brand-logo {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--color-ivory);
+      line-height: 1;
+    }
+    .brand-sub {
+      font-size: 0.7rem;
+      color: var(--color-gold);
+      letter-spacing: 0.1em;
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-link {
+      font-size: 0.92rem;
+      color: var(--color-ivory-dim);
+      font-weight: 500;
+      position: relative;
+    }
+    .nav-link:hover {
+      color: var(--color-gold);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    /* محوّل اللغة الموثوق */
+    .lang-switcher {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-charcoal-border);
+      border-radius: 30px;
+      padding: 3px;
+      gap: 2px;
+    }
+    .lang-btn {
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      border-radius: 20px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .lang-btn.active {
+      background-color: var(--color-gold);
+      color: var(--color-charcoal-deep);
+    }
+
+    /* زر القائمة للشاشات الصغيرة */
+    .hamburger-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-charcoal-border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      z-index: 1002;
+      gap: 5px;
+    }
+    .hamburger-btn span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background-color: var(--color-ivory);
+      transition: all 0.3s ease;
+    }
+    .hamburger-btn.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-btn.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* الستارة وخلفية القائمة الجانبية (Mobile Drawer) */
+    .mobile-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .mobile-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      max-width: 85vw;
+      background-color: #141714;
+      border-inline-start: 1px solid var(--color-charcoal-border);
+      z-index: 1001;
+      padding: 5rem 1.8rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    html[dir="rtl"] .mobile-drawer {
+      left: auto;
+      right: 0;
+      transform: translateX(100%);
+    }
+    html[dir="ltr"] .mobile-drawer {
+      left: 0;
+      right: auto;
+      transform: translateX(-100%);
+    }
+    .mobile-drawer.open {
+      transform: translateX(0) !important;
+    }
+
+    .mobile-drawer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .mobile-drawer-link {
+      font-size: 1.25rem;
+      font-family: var(--font-display);
+      color: var(--color-ivory);
+      display: block;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 0.6rem;
+    }
+    .mobile-drawer-link:hover {
+      color: var(--color-gold);
+    }
+
+    /* ==========================================================================
+       الواجهة الرئيسية (Hero Section)
+       ========================================================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--header-height) + 2rem) 1.5rem 4rem;
+      background: radial-gradient(circle at center, rgba(36, 42, 32, 0.5) 0%, rgba(16, 18, 16, 0.95) 80%),
+                  url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      text-align: center;
+    }
+    .hero-content {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(36, 42, 32, 0.8);
+      border: 1px solid var(--color-gold);
+      color: var(--color-gold-light);
+      padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--color-ivory);
+      margin-bottom: 1.3rem;
+    }
+    .hero-desc {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: var(--color-ivory-dim);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 2.2rem;
+      max-width: 680px;
+      margin-inline: auto;
+    }
+    .hero-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       قسم المقدمة (Introduction)
+       ========================================================================== */
+    .intro-section {
+      padding: 6.5rem 0;
+      background-color: var(--color-charcoal-deep);
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .intro-lead {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--color-gold-light);
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+    }
+    .intro-text {
+      color: var(--color-text-muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .intro-img-box {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border: 1px solid var(--color-charcoal-border);
+      aspect-ratio: 4/5;
+    }
+    .intro-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ==========================================================================
+       الأطباق المختارة (Featured Dishes)
+       ========================================================================== */
+    .featured-section {
+      padding: 6.5rem 0;
+      background-color: var(--color-charcoal);
+      border-block: 1px solid var(--color-charcoal-border);
+    }
+    .section-head-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .dishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .dish-card {
+      background-color: var(--color-charcoal-card);
+      border: 1px solid var(--color-charcoal-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-smooth);
+    }
+    .dish-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-gold);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+    }
+    .dish-img-wrap {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+    }
+    .dish-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .dish-card:hover .dish-img-wrap img {
+      transform: scale(1.06);
+    }
+    .dish-tag {
+      position: absolute;
+      top: 1rem;
+      inset-inline-end: 1rem;
+      background: rgba(16, 18, 16, 0.85);
+      border: 1px solid var(--color-gold);
+      color: var(--color-gold-light);
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .dish-content {
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .dish-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+    }
+    .dish-name {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--color-ivory);
+    }
+    .dish-price {
+      font-size: 1.15rem;
+      color: var(--color-gold);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .dish-desc {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    /* ==========================================================================
+       قائمة الطعام الكاملة بالصور (Menu Section with Photos)
+       ========================================================================== */
+    .menu-section {
+      padding: 7rem 0;
+      background-color: var(--color-charcoal-deep);
+    }
+    .menu-filter-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 2.5rem 0 3.5rem;
+    }
+    .filter-btn {
+      padding: 0.65rem 1.6rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      background: var(--color-charcoal-card);
+      border: 1px solid var(--color-charcoal-border);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all var(--transition-smooth);
+      font-family: inherit;
+    }
+    .filter-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-ivory);
+    }
+    .filter-btn.active {
+      background-color: var(--color-gold);
+      color: var(--color-charcoal-deep);
+      border-color: var(--color-gold);
+    }
+
+    /* شبكة بطاقات الوجبات المصورة */
+    .menu-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 2rem;
+    }
+    .menu-card {
+      background-color: var(--color-charcoal-card);
+      border: 1px solid var(--color-charcoal-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-smooth);
+    }
+    .menu-card:hover {
+      border-color: var(--color-gold);
+      transform: translateY(-4px);
+    }
+    .menu-card-img {
+      height: 190px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .menu-card-body {
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .menu-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.6rem;
+    }
+    .menu-card-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-ivory);
+    }
+    .menu-card-price {
+      font-size: 1.05rem;
+      color: var(--color-gold);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .menu-card-text {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* معرض الصور */
+    .gallery-box {
+      margin-top: 5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+    }
+    .gallery-photo {
+      height: 220px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-photo:hover img {
+      transform: scale(1.08);
+    }
+
+    /* ==========================================================================
+       قصتنا (Our Story)
+       ========================================================================== */
+    .story-section {
+      padding: 6.5rem 0;
+      background-color: var(--color-olive-dark);
+      border-block: 1px solid var(--color-charcoal-border);
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .story-mosaic {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .story-mosaic img {
+      border-radius: var(--radius);
+      height: 250px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .story-mosaic img:first-child {
+      margin-top: 1.5rem;
+    }
+    .story-quote {
+      border-inline-start: 3px solid var(--color-gold);
+      padding-inline-start: 1.5rem;
+      margin: 1.8rem 0;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--color-gold-light);
+      font-style: italic;
+    }
+
+    /* ==========================================================================
+       الموقع وساعات العمل (Location & Contact)
+       ========================================================================== */
+    .location-section {
+      padding: 6.5rem 0;
+      background-color: var(--color-charcoal-deep);
+    }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3.5rem;
+      align-items: stretch;
+    }
+    .info-card {
+      background-color: var(--color-charcoal-card);
+      border: 1px solid var(--color-charcoal-border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .info-item {
+      margin-bottom: 1.8rem;
+    }
+    .info-item-label {
+      color: var(--color-gold);
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .info-item-val {
+      color: var(--color-ivory);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .hours-badge {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: rgba(96, 109, 84, 0.3);
+      border: 1px solid var(--color-olive-accent);
+      color: var(--color-gold-light);
+      padding: 0.35rem 0.9rem;
+      font-size: 0.88rem;
+      border-radius: 4px;
+    }
+    .map-frame {
+      min-height: 420px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--color-charcoal-border);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      border: 0;
+      filter: grayscale(70%) invert(90%) hue-rotate(180deg);
+    }
+
+    /* ==========================================================================
+       الفوتر (Footer)
+       ========================================================================== */
+    .footer {
+      background-color: #0b0d0b;
+      border-top: 1px solid var(--color-charcoal-border);
+      padding: 4.5rem 0 2rem;
+      color: var(--color-text-muted);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+    .footer-col-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--color-ivory);
+      margin-bottom: 1.2rem;
+    }
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      font-size: 0.9rem;
+    }
+    .footer-list a:hover {
+      color: var(--color-gold);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    /* ==========================================================================
+       التجاوب مع الشاشات (Responsive)
+       ========================================================================== */
+    @media (max-width: 992px) {
+      .intro-grid, .story-grid, .location-grid {
+        grid-template-columns: 1fr;
+        gap: 2.8rem;
+      }
+      .gallery-box {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hamburger-btn {
+        display: flex;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 2.3rem;
+      }
+      .section-head-flex {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. شريط التنقل العلوي والقائمة الجانبية
+       ======================================================================== -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" aria-label="VIDRO">
+        <span class="brand-name" data-i18n="brand_name">ڤيدرو</span>
+        <span class="brand-sub" data-i18n="brand_sub">VIDRO • الرياض</span>
+      </a>
+
+      <!-- الروابط في شاشات الحاسوب -->
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link" data-i18n="nav_about">عن ڤيدرو</a></li>
+        <li><a href="#featured" class="nav-link" data-i18n="nav_featured">أطباق مميزة</a></li>
+        <li><a href="#menu" class="nav-link" data-i18n="nav_menu">القائمة المصورة</a></li>
+        <li><a href="#story" class="nav-link" data-i18n="nav_story">قصتنا</a></li>
+        <li><a href="#location" class="nav-link" data-i18n="nav_location">الموقع والزيارة</a></li>
+      </ul>
+
+      <!-- أزرار الإجراءات: زر اللغة والهمبرغر للجوال -->
+      <div class="nav-actions">
+        <div class="lang-switcher">
+          <button type="button" class="lang-btn active" id="btnAr">العربية</button>
+          <button type="button" class="lang-btn" id="btnEn">EN</button>
+        </div>
+
+        <button type="button" class="hamburger-btn" id="menuToggleBtn" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ستارة خلفية للقائمة الجانبية في الجوال -->
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+
+  <!-- القائمة الجانبية للجوال (Mobile Drawer) -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <ul class="mobile-drawer-links">
+      <li><a href="#about" class="mobile-drawer-link" data-i18n="nav_about">عن ڤيدرو</a></li>
+      <li><a href="#featured" class="mobile-drawer-link" data-i18n="nav_featured">أطباق مميزة</a></li>
+      <li><a href="#menu" class="mobile-drawer-link" data-i18n="nav_menu">القائمة المصورة</a></li>
+      <li><a href="#story" class="mobile-drawer-link" data-i18n="nav_story">قصتنا</a></li>
+      <li><a href="#location" class="mobile-drawer-link" data-i18n="nav_location">الموقع والزيارة</a></li>
+    </ul>
+
+    <div>
+      <a href="https://www.google.com/maps/search/?api=1&query=VIDRO+Prince+Mohamed+Bin+Abdulaziz+Rd+Al+Tahliyah+Olaya+St+Riyadh+12241+Saudi+Arabia" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="btn btn-gold" 
+         style="width: 100%;" 
+         data-i18n="btn_maps_direct">
+        الاتجاهات في الخريطة
+      </a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ========================================================================
+         2. الواجهة الرئيسية (Hero)
+         ======================================================================== -->
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <span class="hero-badge" data-i18n="hero_badge">طريق الأمير محمد بن عبد العزيز • التحلية، الرياض</span>
+        <h1 class="hero-title" data-i18n="hero_title">تجربة طهي استثنائية في قلب الرياض</h1>
+        <p class="hero-desc" data-i18n="hero_desc">
+          يجمع ڤيدرو بين رقي التصميم المعماري الحديث والابتكار الرفيع في عالم المأكولات. من إشراقة الصباح الهادئة إلى سهرات المساء المترفة، نأخذكم في رحلة ضيافة لا تُنسى.
+        </p>
+        <div class="hero-btns">
+          <a href="#menu" class="btn btn-gold" data-i18n="hero_btn_menu">استكشف القائمة المصورة</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=VIDRO+Prince+Mohamed+Bin+Abdulaziz+Rd+Al+Tahliyah+Olaya+St+Riyadh+12241+Saudi+Arabia" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn btn-outline" 
+             data-i18n="hero_btn_location">
+            الاتجاهات عبر الخريطة
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         3. مقدمة المطعم (About)
+         ======================================================================== -->
+    <section class="intro-section" id="about">
+      <div class="container intro-grid">
+        <div>
+          <span class="section-eyebrow" data-i18n="intro_eyebrow">أجواء ڤيدرو</span>
+          <h2 class="section-title" data-i18n="intro_title">ضيافة مترفة وتناغم حسي متكامل</h2>
+          <div class="divider-gold"></div>
+          <p class="intro-lead" data-i18n="intro_lead">
+            "ملاذ هادئ يلتقي فيه سحر البساطة العصرية بدفء الضيافة السعودية الأصيلة."
+          </p>
+          <p class="intro-text" data-i18n="intro_body">
+            على امتداد طريق الأمير محمد بن عبد العزيز في الرياض، يفتح مطعم ڤيدرو أبوابه ليوفر أجواء دافئة تحتفي بالتفاصيل ومشروبات القهوة المختصة والمأكولات المبتكرة. سواء كنتم في لقاء عمل، أو استراحة صباحية، أو عشاء استثنائي، صُممت كل تجربة لترتقي بذائقتكم.
+          </p>
+          <a href="#location" class="btn btn-outline" data-i18n="intro_btn">موقعنا وساعات الخدمة</a>
+        </div>
+
+        <div class="intro-img-box">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=900&q=80" alt="VIDRO Ambiance" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         4. الأطباق المختارة (Featured Dishes)
+         ======================================================================== -->
+    <section class="featured-section" id="featured">
+      <div class="container">
+        <div class="section-head-flex">
+          <div>
+            <span class="section-eyebrow" data-i18n="featured_eyebrow">روائع الشيف</span>
+            <h2 class="section-title" data-i18n="featured_title">مختارات ڤيدرو الاستثنائية</h2>
+          </div>
+          <p class="section-subtitle" data-i18n="featured_sub">
+            أطباق صُممت بعناية لتعكس التناغم بين المكونات الموسمية الطازجة وأعلى معايير الطهي العالمية.
+          </p>
+        </div>
+
+        <div class="dishes-grid">
+          <!-- طبق 1 -->
+          <article class="dish-card">
+            <div class="dish-img-wrap">
+              <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80" alt="Vidro Salad" loading="lazy" />
+              <span class="dish-tag" data-i18n="tag_starter">مقبلات منتقاة</span>
+            </div>
+            <div class="dish-content">
+              <div class="dish-header">
+                <h3 class="dish-name" data-i18n="dish1_title">سلطة ڤيدرو بالتمر والجبن</h3>
+                <span class="dish-price">69 ر.س</span>
+              </div>
+              <p class="dish-desc" data-i18n="dish1_desc">
+                أوراق خضراء منتقاة مع صوص التمر المحلي، حمص محمص، جبن ماعز ناعم وتتبيلة الليمون المنعشة.
+              </p>
+            </div>
+          </article>
+
+          <!-- طبق 2 -->
+          <article class="dish-card">
+            <div class="dish-img-wrap">
+              <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Stone Oven Pizza" loading="lazy" />
+              <span class="dish-tag" data-i18n="tag_oven">الفرن الحجري</span>
+            </div>
+            <div class="dish-content">
+              <div class="dish-header">
+                <h3 class="dish-name" data-i18n="dish2_title">بيتزا اللحم على الحجر</h3>
+                <span class="dish-price">73 ر.س</span>
+              </div>
+              <p class="dish-desc" data-i18n="dish2_desc">
+                عجينة مخمرة بعناية مع جبن الموتزاريلا، اللحم المتبل، ونكهة فلفل شقراء التراثي المتوازن.
+              </p>
+            </div>
+          </article>
+
+          <!-- طبق 3 -->
+          <article class="dish-card">
+            <div class="dish-img-wrap">
+              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Angus Short Ribs" loading="lazy" />
+              <span class="dish-tag" data-i18n="tag_mains">طبق رئيسي</span>
+            </div>
+            <div class="dish-content">
+              <div class="dish-header">
+                <h3 class="dish-name" data-i18n="dish3_title">أضلاع أنجوس المطهوة ببطء</h3>
+                <span class="dish-price">115 ر.س</span>
+              </div>
+              <p class="dish-desc" data-i18n="dish3_desc">
+                قطع لحم الأنجوس الفاخرة مطهوة داخل الفرن لعدة ساعات تقدم مع صلصة إكليل الجبل الكريمية.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         5. القائمة المصورة بالكامل مع صور لكل وجبة
+         ======================================================================== -->
+    <section class="menu-section" id="menu">
+      <div class="container">
+        <div style="text-align: center; max-width: 680px; margin: 0 auto;">
+          <span class="section-eyebrow" data-i18n="menu_eyebrow">تذوق ابتكاراتنا</span>
+          <h2 class="section-title" data-i18n="menu_title">قائمة الطعام المصورة</h2>
+          <p class="section-subtitle" style="margin: 0 auto;" data-i18n="menu_subtitle">
+            مأكولات ومشروبات تحضّر يومياً بأجود المكونات الطازجة. كل طبق موثق بصورة توضح طريقة تقديمه.
+          </p>
+        </div>
+
+        <!-- أزرار تصنيفات القائمة -->
+        <div class="menu-filter-bar">
+          <button type="button" class="filter-btn active" data-filter="all" data-i18n="cat_all">كافة الأطباق</button>
+          <button type="button" class="filter-btn" data-filter="breakfast" data-i18n="cat_breakfast">الفطور والبرنش</button>
+          <button type="button" class="filter-btn" data-filter="mains" data-i18n="cat_mains">الأطباق الرئيسية والفرن</button>
+          <button type="button" class="filter-btn" data-filter="desserts" data-i18n="cat_desserts">الحلويات والقهوة</button>
+        </div>
+
+        <!-- شبكة الوجبات - تحتوي كل وجبة على صورتها المباشرة -->
+        <div class="menu-cards-grid" id="menuGrid">
+          
+          <!-- وجبة 1: فطور -->
+          <div class="menu-card" data-cat="breakfast">
+            <img class="menu-card-img" src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80" alt="Eggs Benedict" loading="lazy" />
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <h4 class="menu-card-title" data-i18n="m1_name">بيض بندكت بالبريوش</h4>
+                <span class="menu-card-price">58 ر.س</span>
+              </div>
+              <p class="menu-card-text" data-i18n="m1_desc">بيض مسلوق بعناية، شرائح الديك الرومي المدخن، وصلصة هولنديز بنفحة الزعفران على بريوش محمص.</p>
+            </div>
+          </div>
+
+          <!-- وجبة 2: فطور -->
+          <div class="menu-card" data-cat="breakfast">
+            <img class="menu-card-img" src="https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=600&q=80" alt="Gourmet Shakshuka" loading="lazy" />
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <h4 class="menu-card-title" data-i18n="m2_name">شكشوكة ڤيدرو الفاخرة</h4>
+                <span class="menu-card-price">52 ر.س</span>
+              </div>
+              <p class="menu-card-text" data-i18n="m2_desc">صلصة طماطم مكرملة مع فلفل حلو، بيض عضوي، رشة كمون عطرية وجبن الفيتا المعتق.</p>
+            </div>
+          </div>
+
+          <!-- وجبة 3: طبق رئيسي -->
+          <div class="menu-card" data-cat="mains">
+            <img class="menu-card-img" src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80" alt="Seared Salmon" loading="lazy" />
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <h4 class="menu-card-title" data-i18n="m3_name">سلمون مشوي مع الإدامامي</h4>
+                <span class="menu-card-price">89 ر.س</span>
+              </div>
+              <p class="menu-card-text" data-i18n="m3_desc">شريحة سلمون طازجة مشوية مع الكراث، كينوا خفيفة، وتتبيلة الزنجبيل والليمون الأخضر.</p>
+            </div>
+          </div>
+
+          <!-- وجبة 4: طبق رئيسي -->
+          <div class="menu-card" data-cat="mains">
+            <img class="menu-card-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Angus Burger" loading="lazy" />
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <h4 class="menu-card-title" data-i18n="m4_name">برجر أنجوس ڤيدرو</h4>
+                <span class="menu-card-price">70 ر.س</span>
+              </div>
+              <p class="menu-card-text" data-i18n="m4_desc">لحم أنجوس مفروم فاخر مع البصل المكرمل، خس مقرمش، صوص البرجر الخاص وبطاطس طازجة.</p>
+            </div>
+          </div>
+
+          <!-- وجبة 5: طبق رئيسي -->
+          <div class="menu-card" data-cat="mains">
+            <img class="menu-card-img" src="https://images.unsplash.com/photo-1621996346565-e3d5d6281691?auto=format&fit=crop&w=600&q=80" alt="Truffle Pasta" loading="lazy" />
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <h4 class="menu-card-title" data-i18n="m5_name">باستا الجريش بالكمأة</h4>
+                <span class="menu-card-price">69 ر.س</span>
+              </div>
+              <p class="menu-card-text" data-i18n="m5_desc">تناغم مستوحى من الجريش التقليدي مع قوام الكريمة والبارميجان وفطر الغابات والزعتر البري.</p>
+            </div>
+          </div>
+
+          <!-- وجبة 6: حلى -->
+          <div class="menu-card" data-cat="desserts">
+            <img class="menu-card-img" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80" alt="Sticky Date Pudding" loading="lazy" />
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <h4 class="menu-card-title" data-i18n="m6_name">كيكة التمر بالكراميل</h4>
+                <span class="menu-card-price">48 ر.س</span>
+              </div>
+              <p class="menu-card-text" data-i18n="m6_desc">تمر القصيم الفاخر، صوص كراميل الزبدة البنية الدافئ يقدم مع آيس كريم الفانيليا الطبيعية.</p>
+            </div>
+          </div>
+
+          <!-- وجبة 7: مشروب -->
+          <div class="menu-card" data-cat="desserts">
+            <img class="menu-card-img" src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" alt="Hibiscus Rose Drink" loading="lazy" />
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <h4 class="menu-card-title" data-i18n="m7_name">إكسير الكركديه والورد</h4>
+                <span class="menu-card-price">34 ر.س</span>
+              </div>
+              <p class="menu-card-text" data-i18n="m7_desc">مستخلص زهور الكركديه البارد، رذاذ الرمان المنعش مع أوراق النعناع الطازجة والثلج النقي.</p>
+            </div>
+          </div>
+
+          <!-- وجبة 8: مشروب -->
+          <div class="menu-card" data-cat="desserts">
+            <img class="menu-card-img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Artisan Coffee" loading="lazy" />
+            <div class="menu-card-body">
+              <div class="menu-card-top">
+                <h4 class="menu-card-title" data-i18n="m8_name">فلات وايت ڤيدرو المختص</h4>
+                <span class="menu-card-price">28 ر.س</span>
+              </div>
+              <p class="menu-card-text" data-i18n="m8_desc">إسبريسو غني مستخلص من حبوب بن محمصة بعناية مع حليب مبخر بقوام مخملي متوازن.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- صور سريعة للأجواء والضيافة -->
+        <div class="gallery-box">
+          <div class="gallery-photo"><img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80" alt="Lounge" loading="lazy"/></div>
+          <div class="gallery-photo"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Baking" loading="lazy"/></div>
+          <div class="gallery-photo"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="Dessert" loading="lazy"/></div>
+          <div class="gallery-photo"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80" alt="Chef prep" loading="lazy"/></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         6. قصتنا (Our Story)
+         ======================================================================== -->
+    <section class="story-section" id="story">
+      <div class="container story-grid">
+        <div class="story-mosaic">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=700&q=80" alt="Kitchen Craft" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=700&q=80" alt="Interior Details" loading="lazy" />
+        </div>
+
+        <div>
+          <span class="section-eyebrow" data-i18n="story_eyebrow">فلسفتنا</span>
+          <h2 class="section-title" data-i18n="story_title">مستوحى من نبض الرياض المعاصر</h2>
+          <div class="divider-gold"></div>
+          <p class="intro-text" data-i18n="story_p1">
+            انطلق ڤيدرو ليكون مساحة حضرية فريدة، تجتمع فيها الهندسة المعمارية الهادئة والمذاقات المبتكرة لخلق أوقات مريحة وثرية.
+          </p>
+          <div class="story-quote" data-i18n="story_quote">
+            "نؤمن بأن الضيافة تجربة متكاملة تبدأ من دفء الإضاءة وجمال التفاصيل وحتى آخر لقمة."
+          </div>
+          <p class="intro-text" data-i18n="story_p2">
+            تتلاقى في مطبخنا لمسات المطبخ العالمي مع المكونات المحلية المفضلة لروادنا في الرياض الباحثين عن التميز والهدوء.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         7. الموقع وساعات العمل والاتصال
+         ======================================================================== -->
+    <section class="location-section" id="location">
+      <div class="container">
+        <div style="margin-bottom: 3.5rem;">
+          <span class="section-eyebrow" data-i18n="loc_eyebrow">تفضل بزيارتنا</span>
+          <h2 class="section-title" data-i18n="loc_title">موقع ڤيدرو في الرياض</h2>
+          <p class="section-subtitle" data-i18n="loc_subtitle">
+            طريق الأمير محمد بن عبد العزيز، حي العليا، الرياض.
+          </p>
+        </div>
+
+        <div class="location-grid">
+          <!-- بطاقة التفاصيل -->
+          <div class="info-card">
+            <div>
+              <div class="info-item">
+                <div class="info-item-label" data-i18n="info_address_label">العنوان</div>
+                <div class="info-item-val" data-i18n="info_address_val">
+                  طريق الأمير محمد بن عبد العزيز (التحلية)، العليا، الرياض 12241، المملكة العربية السعودية.
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-item-label" data-i18n="info_hours_label">أوقات العمل</div>
+                <div class="info-item-val" data-i18n="info_hours_val">
+                  يومياً • الفطور، الغداء، العشاء وركن المشروبات المسائي
+                </div>
+                <div class="hours-badge" data-i18n="info_hours_pill">خدمة متواصلة على مدار 24 ساعة</div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-item-label" data-i18n="info_contact_label">للتواصل والاستفسار</div>
+                <div class="info-item-val">
+                  <a href="tel:+966555351612" style="color: var(--color-gold); font-weight: 600;">+966 55 535 1612</a>
+                  <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-top: 4px;" data-i18n="info_contact_note">
+                    نرحب بكم مباشرة مع توفر خدمة صف السيارات
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- زر خرائط جوجل المباشر -->
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Prince+Mohamed+Bin+King+Abdulaziz+Rd+Al+Tahliyah+Olaya+St+Riyadh+12241+Saudi+Arabia"
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-gold" 
+               style="text-align: center; width: 100%;"
+               data-i18n="btn_maps_direct">
+              فتح المسار عبر خرائط جوجل
+            </a>
+          </div>
+
+          <!-- إطار الخريطة -->
+          <div class="map-frame">
+            <iframe 
+              title="VIDRO Riyadh Map"
+              src="https://maps.google.com/maps?q=Prince%20Mohamed%20Bin%20Abdulaziz%20Rd%2C%20Al%20Olaya%2C%20Riyadh%2012241&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              loading="lazy" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       8. الفوتر
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-name" data-i18n="brand_name">ڤيدرو</div>
+          <div class="brand-sub" data-i18n="brand_sub">VIDRO • الرياض</div>
+          <p style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6; font-weight: 300;" data-i18n="footer_desc">
+            وجهة طعام واستجمام راقية على طريق الأمير محمد بن عبد العزيز، العليا، الرياض.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title" data-i18n="footer_col_nav">استكشف</h4>
+          <ul class="footer-list">
+            <li><a href="#about" data-i18n="nav_about">عن ڤيدرو</a></li>
+            <li><a href="#featured" data-i18n="nav_featured">أطباق مميزة</a></li>
+            <li><a href="#menu" data-i18n="nav_menu">القائمة المصورة</a></li>
+            <li><a href="#story" data-i18n="nav_story">قصتنا</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title" data-i18n="footer_col_hours">الخدمة</h4>
+          <ul class="footer-list">
+            <li data-i18n="f_h1">مفتوح 24 ساعة</li>
+            <li data-i18n="f_h2">فطور وبرنش يومي</li>
+            <li data-i18n="f_h3">عشاء وجلسات مسائية</li>
+            <li data-i18n="f_h4">قهوة مختصة وحلويات</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title" data-i18n="footer_col_connect">التواصل</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-i18n="footer_visit_us">العليا، شارع التحلية، الرياض</p>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" style="color: var(--color-gold);">@vidro.sa</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © <span id="yearSpan"></span> VIDRO (ڤيدرو). <span data-i18n="footer_rights">جميع الحقوق محفوظة.</span>
+        </div>
+        <div data-i18n="footer_location_bottom">
+          الرياض 12241، المملكة العربية السعودية
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       نظام الجافاسكربت: إصلاح القائمة والترجمة وتصفية القائمة
+       ======================================================================== -->
+  <script>
+    // قاموس الترجمة الكامل لجميع النصوص
+    const dictionary = {
+      ar: {
+        brand_name: "ڤيدرو",
+        brand_sub: "VIDRO • الرياض",
+        nav_about: "عن ڤيدرو",
+        nav_featured: "أطباق مميزة",
+        nav_menu: "القائمة المصورة",
+        nav_story: "قصتنا",
+        nav_location: "الموقع والزيارة",
+
+        hero_badge: "طريق الأمير محمد بن عبد العزيز • التحلية، الرياض",
+        hero_title: "تجربة طهي استثنائية في قلب الرياض",
+        hero_desc: "يجمع ڤيدرو بين رقي التصميم المعماري الحديث والابتكار الرفيع في عالم المأكولات. من إشراقة الصباح الهادئة إلى سهرات المساء المترفة، نأخذكم في رحلة ضيافة لا تُنسى.",
+        hero_btn_menu: "استكشف القائمة المصورة",
+        hero_btn_location: "الاتجاهات عبر الخريطة",
+
+        intro_eyebrow: "أجواء ڤيدرو",
+        intro_title: "ضيافة مترفة وتناغم حسي متكامل",
+        intro_lead: "\"ملاذ هادئ يلتقي فيه سحر البساطة العصرية بدفء الضيافة السعودية الأصيلة.\"",
+        intro_body: "على امتداد طريق الأمير محمد بن عبد العزيز في الرياض، يفتح مطعم ڤيدرو أبوابه ليوفر أجواء دافئة تحتفي بالتفاصيل ومشروبات القهوة المختصة والمأكولات المبتكرة. سواء كنتم في لقاء عمل، أو استراحة صباحية، أو عشاء استثنائي، صُممت كل تجربة لترتقي بذائقتكم.",
+        intro_btn: "موقعنا وساعات الخدمة",
+
+        featured_eyebrow: "روائع الشيف",
+        featured_title: "مختارات ڤيدرو الاستثنائية",
+        featured_sub: "أطباق صُممت بعناية لتعكس التناغم بين المكونات الموسمية الطازجة وأعلى معايير الطهي العالمية.",
+        tag_starter: "مقبلات منتقاة",
+        tag_oven: "الفرن الحجري",
+        tag_mains: "طبق رئيسي",
+        dish1_title: "سلطة ڤيدرو بالتمر والجبن",
+        dish1_desc: "أوراق خضراء منتقاة مع صوص التمر المحلي، حمص محمص، جبن ماعز ناعم وتتبيلة الليمون المنعشة.",
+        dish2_title: "بيتزا اللحم على الحجر",
+        dish2_desc: "عجينة مخمرة بعناية مع جبن الموتزاريلا، اللحم المتبل، ونكهة فلفل شقراء التراثي المتوازن.",
+        dish3_title: "أضلاع أنجوس المطهوة ببطء",
+        dish3_desc: "قطع لحم الأنجوس الفاخرة مطهوة داخل الفرن لعدة ساعات تقدم مع صلصة إكليل الجبل الكريمية.",
+
+        menu_eyebrow: "تذوق ابتكاراتنا",
+        menu_title: "قائمة الطعام المصورة",
+        menu_subtitle: "مأكولات ومشروبات تحضّر يومياً بأجود المكونات الطازجة. كل طبق موثق بصورة توضح طريقة تقديمه.",
+        cat_all: "كافة الأطباق",
+        cat_breakfast: "الفطور والبرنش",
+        cat_mains: "الأطباق الرئيسية والفرن",
+        cat_desserts: "الحلويات والقهوة",
+
+        m1_name: "بيض بندكت بالبريوش",
+        m1_desc: "بيض مسلوق بعناية، شرائح الديك الرومي المدخن، وصلصة هولنديز بنفحة الزعفران على بريوش محمص.",
+        m2_name: "شكشوكة ڤيدرو الفاخرة",
+        m2_desc: "صلصة طماطم مكرملة مع فلفل حلو، بيض عضوي، رشة كمون عطرية وجبن الفيتا المعتق.",
+        m3_name: "سلمون مشوي مع الإدامامي",
+        m3_desc: "شريحة سلمون طازجة مشوية مع الكراث، كينوا خفيفة، وتتبيلة الزنجبيل والليمون الأخضر.",
+        m4_name: "برجر أنجوس ڤيدرو",
+        m4_desc: "لحم أنجوس مفروم فاخر مع البصل المكرمل، خس مقرمش، صوص البرجر الخاص وبطاطس طازجة.",
+        m5_name: "باستا الجريش بالكمأة",
+        m5_desc: "تناغم مستوحى من الجريش التقليدي مع قوام الكريمة والبارميجان وفطر الغابات والزعتر البري.",
+        m6_name: "كيكة التمر بالكراميل",
+        m6_desc: "تمر القصيم الفاخر، صوص كراميل الزبدة البنية الدافئ يقدم مع آيس كريم الفانيليا الطبيعية.",
+        m7_name: "إكسير الكركديه والورد",
+        m7_desc: "مستخلص زهور الكركديه البارد، رذاذ الرمان المنعش مع أوراق النعناع الطازجة والثلج النقي.",
+        m8_name: "فلات وايت ڤيدرو المختص",
+        m8_desc: "إسبريسو غني مستخلص من حبوب بن محمصة بعناية مع حليب مبخر بقوام مخملي متوازن.",
+
+        story_eyebrow: "فلسفتنا",
+        story_title: "مستوحى من نبض الرياض المعاصر",
+        story_p1: "انطلق ڤيدرو ليكون مساحة حضرية فريدة، تجتمع فيها الهندسة المعمارية الهادئة والمذاقات المبتكرة لخلق أوقات مريحة وثرية.",
+        story_quote: "\"نؤمن بأن الضيافة تجربة متكاملة تبدأ من دفء الإضاءة وجمال التفاصيل وحتى آخر لقمة.\"",
+        story_p2: "تتلاقى في مطبخنا لمسات المطبخ العالمي مع المكونات المحلية المفضلة لروادنا في الرياض الباحثين عن التميز والهدوء.",
+
+        loc_eyebrow: "تفضل بزيارتنا",
+        loc_title: "موقع ڤيدرو في الرياض",
+        loc_subtitle: "طريق الأمير محمد بن عبد العزيز، حي العليا، الرياض.",
+        info_address_label: "العنوان",
+        info_address_val: "طريق الأمير محمد بن عبد العزيز (التحلية)، العليا، الرياض 12241، المملكة العربية السعودية.",
+        info_hours_label: "أوقات العمل",
+        info_hours_val: "يومياً • الفطور، الغداء، العشاء وركن المشروبات المسائي",
+        info_hours_pill: "خدمة متواصلة على مدار 24 ساعة",
+        info_contact_label: "للتواصل والاستفسار",
+        info_contact_note: "نرحب بكم مباشرة مع توفر خدمة صف السيارات",
+        btn_maps_direct: "فتح المسار عبر خرائط جوجل",
+
+        footer_desc: "وجهة طعام واستجمام راقية على طريق الأمير محمد بن عبد العزيز، العليا، الرياض.",
+        footer_col_nav: "استكشف",
+        footer_col_hours: "الخدمة",
+        footer_col_connect: "التواصل",
+        footer_visit_us: "العليا، شارع التحلية، الرياض",
+        f_h1: "مفتوح 24 ساعة",
+        f_h2: "فطور وبرنش يومي",
+        f_h3: "عشاء وجلسات مسائية",
+        f_h4: "قهوة مختصة وحلويات",
+        footer_rights: "جميع الحقوق محفوظة.",
+        footer_location_bottom: "الرياض 12241، المملكة العربية السعودية"
+      },
+
+      en: {
+        brand_name: "VIDRO",
+        brand_sub: "RIYADH • مطعم ڤيدرو",
+        nav_about: "About VIDRO",
+        nav_featured: "Featured Dishes",
+        nav_menu: "Visual Menu",
+        nav_story: "Our Story",
+        nav_location: "Location & Visit",
+
+        hero_badge: "Prince Mohamed Bin Abdulaziz Rd • Al Olaya, Riyadh",
+        hero_title: "An Exceptional Culinary Experience in the Heart of Riyadh",
+        hero_desc: "VIDRO merges modern architectural grace with inspired culinary creations. From slow mornings to vibrant late evenings, discover an atmosphere crafted for refined tastes.",
+        hero_btn_menu: "Explore Visual Menu",
+        hero_btn_location: "Get Directions via Map",
+
+        intro_eyebrow: "The VIDRO Atmosphere",
+        intro_title: "Sophisticated Dining, Seamlessly Curated",
+        intro_lead: "\"A sanctuary of flavor where contemporary aesthetics meet warm Arabian hospitality.\"",
+        intro_body: "Located along Riyadh’s prestigious Prince Mohamed Bin Abdulaziz Road, VIDRO welcomes guests into an environment of warm tones, natural textures, and artisanal cuisine. Whether gathering for specialty coffee, a business lunch, or an intimate dinner, every moment is elevated.",
+        intro_btn: "Location & Service Hours",
+
+        featured_eyebrow: "Chef's Highlights",
+        featured_title: "Selected VIDRO Signatures",
+        featured_sub: "Sample plates reflecting our commitment to balance, fresh seasonality, and refined international technique.",
+        tag_starter: "Selected Starter",
+        tag_oven: "Stone Oven",
+        tag_mains: "Main Course",
+        dish1_title: "Vidro Date & Artisan Greens",
+        dish1_desc: "Crisp field greens, sweet local date reduction, toasted chickpeas, goat curd, and light citrus dressing.",
+        dish2_title: "Stone-Baked Spiced Meat Pizza",
+        dish2_desc: "Slow-fermented dough topped with aged mozzarella, seasoned beef, fresh herbs, and balanced Shaqra pepper.",
+        dish3_title: "Slow Braised Angus Short Ribs",
+        dish3_desc: "Oven-braised prime Angus cut served with rosemary cream reduction and aromatic garnish.",
+
+        menu_eyebrow: "Taste Our Creations",
+        menu_title: "Visual Menu",
+        menu_subtitle: "Curated dishes prepared daily with fresh ingredients. Every dish is accompanied by its high-definition photo.",
+        cat_all: "All Dishes",
+        cat_breakfast: "Breakfast & Brunch",
+        cat_mains: "Mains & Stone Oven",
+        cat_desserts: "Sweets & Coffee",
+
+        m1_name: "Brioche Eggs Benedict",
+        m1_desc: "Poached eggs, smoked turkey ham, saffron hollandaise on warm toasted brioche.",
+        m2_name: "Gourmet Shakshuka",
+        m2_desc: "Caramelized tomato reduction with sweet peppers, organic eggs, cumin essence, and aged feta.",
+        m3_name: "Seared Salmon & Edamame",
+        m3_desc: "Fresh pan-seared salmon fillet, braised leeks, tender quinoa, and ginger-lime emulsion.",
+        m4_name: "Vidro Signature Angus Burger",
+        m4_desc: "Ground prime Angus beef, caramelized onions, crisp lettuce, house-smoked sauce, and hand-cut fries.",
+        m5_name: "Jareesh Truffle Cream Pasta",
+        m5_desc: "Heritage cracked wheat fusion with velvety cream, parmesan, wild mushrooms, and thyme.",
+        m6_name: "Sticky Date Warm Pudding",
+        m6_desc: "Traditional Qassimi dates, molten brown butter caramel, served with rich vanilla bean gelato.",
+        m7_name: "Hibiscus & Rose Elixir",
+        m7_desc: "Chilled wild karkadeh blossom infusion, pomegranate mist, fresh garden mint, and pure crystal ice.",
+        m8_name: "Specialty Flat White",
+        m8_desc: "Double espresso pulled from freshly roasted beans with velvety steamed whole milk.",
+
+        story_eyebrow: "Our Philosophy",
+        story_title: "Rooted in Riyadh’s Contemporary Rhythm",
+        story_p1: "VIDRO was conceived as an homage to modern urban dining. Our vision centers around a gathering place where serene aesthetics and rich culinary textures converse effortlessly.",
+        story_quote: "\"We believe dining is an architectural experience—every plate, shadow, and warm greeting defines the memory.\"",
+        story_p2: "Every dish balances heritage ingredients with modern international culinary techniques, crafted for discerning guests who appreciate calm, beauty, and culinary dedication.",
+
+        loc_eyebrow: "Plan Your Visit",
+        loc_title: "Find VIDRO in Riyadh",
+        loc_subtitle: "Prince Mohamed Bin Abdulaziz Road, Al Olaya District, Riyadh.",
+        info_address_label: "Address",
+        info_address_val: "Prince Mohamed Bin, King Abdulaziz Rd, Al Tahliyah, Olaya St, Riyadh 12241, Saudi Arabia.",
+        info_hours_label: "Service Schedule",
+        info_hours_val: "Open Daily • Breakfast, Lunch, Dinner & Late Night Lounge",
+        info_hours_pill: "24 Hours Continuous Hospitality",
+        info_contact_label: "Direct Inquiries",
+        info_contact_note: "Walk-ins welcome & valet parking service available",
+        btn_maps_direct: "Open Route in Google Maps",
+
+        footer_desc: "An original dining space on Prince Mohamed Bin Abdulaziz Road, Riyadh, reflecting culinary elegance and authentic hospitality.",
+        footer_col_nav: "Explore",
+        footer_col_hours: "Service",
+        footer_col_connect: "Connect",
+        footer_visit_us: "Al Olaya, Tahlia St, Riyadh",
+        f_h1: "Open 24/7",
+        f_h2: "Daily Breakfast & Brunch",
+        f_h3: "Evening Dining",
+        f_h4: "Specialty Coffee & Desserts",
+        footer_rights: "All rights reserved.",
+        footer_location_bottom: "Riyadh 12241, Kingdom of Saudi Arabia"
+      }
+    };
+
+    // 1. نظام تبديل اللغة الفوري والمضمون
+    const btnAr = document.getElementById('btnAr');
+    const btnEn = document.getElementById('btnEn');
+
+    function applyLanguage(lang) {
+      if (!dictionary[lang]) return;
+
+      const html = document.documentElement;
+      html.lang = lang;
+      html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+      btnAr.classList.toggle('active', lang === 'ar');
+      btnEn.classList.toggle('active', lang === 'en');
+
+      // تحديث كل النصوص التي تحتوي على data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dictionary[lang][key]) {
+          el.textContent = dictionary[lang][key];
+        }
+      });
+
+      // حفظ اللغة في المتصفح
+      try {
+        localStorage.setItem('vidro_lang', lang);
+      } catch (e) {}
+    }
+
+    btnAr.addEventListener('click', () => applyLanguage('ar'));
+    btnEn.addEventListener('click', () => applyLanguage('en'));
+
+    // استعادة لغة المستخدم المحفوظة إن وجدت
+    const savedLang = localStorage.getItem('vidro_lang') || 'ar';
+    applyLanguage(savedLang);
+
+    // 2. إصلاح القائمة الجانبية للجوال (Mobile Drawer)
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileBackdrop = document.getElementById('mobileBackdrop');
+
+    function toggleMobileMenu() {
+      const isOpen = mobileDrawer.classList.contains('open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    function openMobileMenu() {
+      mobileDrawer.classList.add('open');
+      mobileBackdrop.classList.add('open');
+      menuToggleBtn.classList.add('active');
+      document.body.style.overflow = 'hidden'; // منع التمرير عند فتح القائمة
+    }
+
+    function closeMobileMenu() {
+      mobileDrawer.classList.remove('open');
+      mobileBackdrop.classList.remove('open');
+      menuToggleBtn.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    menuToggleBtn.addEventListener('click', toggleMobileMenu);
+    mobileBackdrop.addEventListener('click', closeMobileMenu);
+
+    // إغلاق القائمة عند النقر على أي رابط بداخلها
+    document.querySelectorAll('.mobile-drawer-link').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // 3. تصفية تصنيفات قائمة الطعام
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const menuCards = document.querySelectorAll('.menu-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+        menuCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-cat') === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 4. تحديث سنة حقوق النشر تلقائياً
+    document.getElementById('yearSpan').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
